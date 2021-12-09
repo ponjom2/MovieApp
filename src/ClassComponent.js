@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { FlatList, Text, ActivityIndicator, View } from 'react-native';
+import style from './Styles';
 
 class MovieApp extends Component {
   constructor() {
@@ -21,6 +22,8 @@ class MovieApp extends Component {
         })
       })
       .catch((e) => console.log(e));
+    setTimeout(() => {
+    }, 1000);
   }
 
   render() {
@@ -36,8 +39,10 @@ class MovieApp extends Component {
           data={this.state.dataSource}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item, index }) => (
-            <View>
-              <Text>{item.id}{item.title}{item.releaseYear}</Text>
+            <View style={style.row}>
+              <Text style={[style.text, style.left]}>{item.id}</Text>
+              <Text style={style.text}>{item.title}</Text>
+              <Text style={[style.text, style.right]}>{item.releaseYear}</Text>
             </View>
           )}
         />

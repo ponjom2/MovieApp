@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text, ActivityIndicator, View } from 'react-native';
 import { useState, useEffect } from 'react';
+import style from './Styles';
 
 function FunctionComponent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,20 +16,22 @@ function FunctionComponent() {
       .catch((e) => console.log(e));
     setTimeout(() => {
       setIsLoading(false)
-    }, 2000);
-  }, [])
+    }, 1000);
+  })
 
   return (
     <View>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       ) :
         <FlatList
           data={myArr}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item, index }) => (
-            <View>
-              <Text>{item.id}{item.title}{item.releaseYear}</Text>
+            <View style={style.row}>
+              <Text style={[style.text, style.left]}>{item.id}</Text>
+              <Text style={style.text}>{item.title}</Text>
+              <Text style={[style.text, style.right]}>{item.releaseYear}</Text>
             </View>
           )}
         />
